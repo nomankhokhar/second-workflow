@@ -15,4 +15,6 @@ jobs:
           cd React\ Simple\ Project
           npm install
       - name: Run tests
-        run: npm test
+        run: |
+          cd React\ Simple\ Project
+          npm test
