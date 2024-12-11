@@ -14,11 +14,11 @@ jobs:
       - name: Install dependencies
         run: |
           cd pratice
-          npm run lint
-      - name: Install dependencies
+          npm install
+      - name: checking linting
         run: |
           cd pratice
-          npm install
+          npm run lint
       - name: Run Tests
         run: |
           cd pratice
@@ -35,11 +35,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: |
-          cd cd pratice
+          cd pratice
           npm install
       - name: Build Project
         run: |
-          cd cd pratice
+          cd pratice
           npm run build
       - name: Deploy
         run: echo "Deploying to production"
