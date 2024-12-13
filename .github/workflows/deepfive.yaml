@@ -17,7 +17,9 @@ jobs:
           cd deepdive
           npm install
       - name: Test code
-        run: npm run test
+        run: |
+          cd deepdive
+          npm run test
       - name: Build code
         run: |
           cd deepdive
