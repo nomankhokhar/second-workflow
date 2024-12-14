@@ -10,11 +10,17 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd jobartifact
+          npm install
       - name: Lint code
-        run: npm run lint
+        run: |
+          cd jobartifact
+          npm run lint
       - name: Test code
-        run: npm run test
+        run: |
+          cd jobartifact
+          npm run test
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -22,9 +28,13 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd jobartifact
+          npm ci
       - name: Build website
-        run: npm run build
+        run: |
+          cd jobartifact
+          npm run build
   deploy:
     needs: build
     runs-on: ubuntu-latest
