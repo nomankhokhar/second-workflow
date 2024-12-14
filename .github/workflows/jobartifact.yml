@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+env:
+  NODE: production
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -52,4 +54,4 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy
-        run: echo "Deploying..."
+        run: echo "Deploying...${{ env.NODE }}"
