@@ -41,10 +41,15 @@ jobs:
           name: dist-files-jobartifact
           path: |
             jobartifact/dist
-            jobartifact/package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files-jobartifact
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
