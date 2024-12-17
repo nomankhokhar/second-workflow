@@ -39,11 +39,12 @@ jobs:
           cd jobExecution
           npm ci
       - name: Test code
+        id: test-code
         run: |
           cd jobExecution
           npm run test
       - name: Upload test report
-        if:
+        if: steps.test-code.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
