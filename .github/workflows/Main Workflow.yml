@@ -80,7 +80,7 @@ jobs:
           path: dist
   deploy:
     needs: build
-    uses: ./.github/workflows/reUseable.yaml
+    uses: ./.github/workflows/reuseable.yaml
     with:
       artifact-name: disk-files
     # secrets:
