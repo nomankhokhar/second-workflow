@@ -81,6 +81,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reUseable.yaml
+    with:
+      artifact-name: disk-files
   report:
     needs: ["lint", "test", "deploy"]
     if: ${{ failure() }}
