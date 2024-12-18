@@ -1,8 +1,10 @@
-name: Website Deployment using ReuseAble Workflow
+name: Website Deployment using Reusable Workflow
+
 on:
   push:
     branches:
       - main
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -16,7 +18,7 @@ jobs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true' # check if cache available do not install dependencies
+        if: steps.cache.outputs.cache-hit != 'true' # Install dependencies if cache is unavailable
         run: |
           cd jobExecution
           npm ci
@@ -24,6 +26,7 @@ jobs:
         run: |
           cd jobExecution
           npm run lint
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -36,7 +39,7 @@ jobs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true' # check if cache available do not install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd jobExecution
           npm ci
@@ -51,6 +54,7 @@ jobs:
         with:
           name: test-report
           path: test.json
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -64,7 +68,7 @@ jobs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true' # check if cache available do not install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd jobExecution
           npm ci
@@ -76,21 +80,22 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: dist-files
-          path: dist
+          name: dist # Ensure this matches the default artifact name
+          path: jobExecution/dist
+
   deploy:
     needs: build
     uses: ./.github/workflows/reuseable.yaml
     with:
-      artifact-name: disk-files
-    # secrets:
-    #  some-secrets: ${{ secrets.some-secrets }}
+      artifact-name: dist # Consistent with the build artifact name
+
   print-the-output:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Print deploy output
-        run: "${{ needs.deploy.outputs.result }}"
+        run: echo "${{ needs.deploy.outputs.result }}"
+
   report:
     needs: ["lint", "test", "deploy"]
     if: ${{ failure() }}
