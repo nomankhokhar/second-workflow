@@ -83,6 +83,14 @@ jobs:
     uses: ./.github/workflows/reUseable.yaml
     with:
       artifact-name: disk-files
+    # secrets:
+    #  some-secrets: ${{ secrets.some-secrets }}
+  print-the-output:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: "${{ needs.deploy.outputs.result }}"
   report:
     needs: ["lint", "test", "deploy"]
     if: ${{ failure() }}
