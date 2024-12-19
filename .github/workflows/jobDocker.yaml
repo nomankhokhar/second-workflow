@@ -17,7 +17,8 @@ jobs:
       MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 # Should be same as service name (mongodb)
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
-      PORT: 27017
+      PORT:
+        - 27017:27017
     services:
       mongodb: # Service name is ( mongodb )
         image: mongo
