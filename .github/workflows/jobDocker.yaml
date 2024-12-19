@@ -14,15 +14,15 @@ jobs:
     container: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb # should be same as service name (mongodb)
+      MONGODB_CLUSTER_ADDRESS: mongodb # Should be same as service name (mongodb)
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
     services:
-      mongodb: # service name is ( mongodb )
+      mongodb: # Service name is ( mongodb )
         image: mongo
         env:
-          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_USERNAME: root # Root and example are the credentials for testing environment
           MONGO_INITDB_ROOT_PASSWORD: example
     steps:
       - name: Get Code
