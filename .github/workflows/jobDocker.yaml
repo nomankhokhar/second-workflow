@@ -41,7 +41,9 @@ jobs:
           cd jobDocker 
           npm start & npx wait-on http://127.0.0.1:$PORT # requires MongoDB Atlas to accept requests from anywhere!
       - name: Run tests
-        run: npm test
+        run: |
+          cd jobDocker
+          npm test
       - name: Output information
         run: |
           cd jobDocker
