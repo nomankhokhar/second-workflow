@@ -14,10 +14,10 @@ jobs:
     container: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb # Should be same as service name (mongodb)
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 # Should be same as service name (mongodb)
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
-      PORT: 8080
+      PORT: 27017
     services:
       mongodb: # Service name is ( mongodb )
         image: mongo
@@ -56,7 +56,6 @@ jobs:
         env:
           PORT: 3000
         run: |
-          cd jobDocker  
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
           echo "MONGODB_USERNAME: $MONGODB_USERNAME"
           echo "${{ env.PORT }}"
